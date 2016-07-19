@@ -8,15 +8,15 @@ class SessionsController < ApplicationController
 
     if user && user.authenticate(params[:password])
       session[:user_id] = user.id
-      redirect_to users_path
+      render :create
     else
-      render :new
+      redirect_to new_user_path
     end
   end
 
   def destroy
     session[:user_id] = nil
-    redirect_to users_path, notice: "Adios!"
+    redirect_to new_user_path
   end
 
 end

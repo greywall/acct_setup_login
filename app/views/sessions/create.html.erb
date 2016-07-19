@@ -1,2 +1,49 @@
-<h1>Sessions#create</h1>
-<p>Find me in app/views/sessions/create.html.erb</p>
+<h1 class="header">Welcome to my Colourful Square</h1>
+	<div class="main_div"></div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+<script>
+$(document).ready(function() {
+
+	$m = $(".main_div").css('background-color', '#'+Math.floor(Math.random()*16777215).toString(16))
+
+	$x = window.innerWidth
+	$y = window.innerHeight
+
+	$(".main_div").css('height',$y);
+	$(".main_div").css('width',$x);
+
+	$window_size= $(window).resize(function(){
+	if ($x >= $y) {
+			$x = $y
+		} else {
+			$y = $x
+	}
+	$(".main_div").css('height',$y);
+	$(".main_div").css('width',$x);
+	});
+
+	var state = 1, counter = 0
+	//Tried to make size = windowHeight 
+	$m.click(function(){
+	    counter++;
+	    state = state*4, box_dimension = $x/(Math.pow(2,counter));
+	    //state = state*4, box_dimension = $x/4;
+	    //state is number of boxes after click
+	    //pow is exponent function
+	    $m.empty();
+			//if h >= w, h=w
+			//elseif w >= h, w=h
+	    var i
+	    for(i=0; i<state; i++)
+	      $m.append(
+	        $('<div title='+ i +'/>')
+	        .css('background-color', '#'+Math.floor(Math.random()*16777215).toString(16))
+	      );
+	    $m.find('> div').css({ width:box_dimension, height:box_dimension});
+	});
+});
+
+
+</script>
